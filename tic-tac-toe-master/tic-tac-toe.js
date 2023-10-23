@@ -42,13 +42,13 @@ boxes.forEach(function(elem, index) {
 			if (trace[a-1] == ""){
 				if (turn % 2 == 0){
 					elem.appendChild(otext);
-					e.target.classList.add('square.O');
+					e.target.classList.add('O');
 					trace[a-1] = "O";
 					
 				}
 				else{
 					elem.appendChild(xtext);
-					e.target.classList.add('square.X');
+					e.target.classList.add('X');
 					trace[a-1] = "X";
 				}
 				console.log(a);
