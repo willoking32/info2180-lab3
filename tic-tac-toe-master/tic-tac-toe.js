@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded',() =>{
 	let trace = ["","","","","","","","",""];
 	let turn = 0;
 	let wincon = document.getElementById('status');
-	
+	let win = false;
 	
 
 	for(var i = 1; i < boxes.length; i += 2){
@@ -33,30 +33,33 @@ boxes.forEach(function(elem, index) {
 		
 		
 		elem.addEventListener('click',function(e){
-			let xtext = document.createTextNode('X');
-			let otext = document.createTextNode('O');
-			
-			let a = (index / 2)+1 - 0.5;
-			
-			//console.log(index);
-			if (trace[a-1] == ""){
-				if (turn % 2 == 0){
-					elem.appendChild(otext);
-					e.target.classList.add('O');
-					trace[a-1] = "O";
-					
+			if (win == false){
+				let xtext = document.createTextNode('X');
+				let otext = document.createTextNode('O');
+				
+				let a = (index / 2)+1 - 0.5;
+				
+				//console.log(index);
+				if (trace[a-1] == ""){
+					if (turn % 2 == 0){
+						elem.appendChild(otext);
+						e.target.classList.add('O');
+						trace[a-1] = "O";
+						
+					}
+					else{
+						elem.appendChild(xtext);
+						e.target.classList.add('X');
+						trace[a-1] = "X";
+					}
+					console.log(a);
+					turn += 1;
+					//console.log(turn);
+					console.log(trace);
 				}
-				else{
-					elem.appendChild(xtext);
-					e.target.classList.add('X');
-					trace[a-1] = "X";
-				}
-				console.log(a);
-				turn += 1;
-				//console.log(turn);
-				console.log(trace);
+				
+				//console.log(board);
 			}
-			//console.log(board);
 		});
 		
 		//mouse on
@@ -81,6 +84,7 @@ boxes.forEach(function(elem, index) {
 					if(trace[i-1] === trace[i] && trace[i] === trace[i+1]){
 						wincon.textContent = 'Congratulations! '+ trace[i]+ ' is the Winner!';
 						console.log(wincon);
+						win = true;
 					}
 				}
 			}
@@ -90,6 +94,7 @@ boxes.forEach(function(elem, index) {
 					if ((trace[i] === trace[i+3] && trace[i+3] === trace[i+6]) || (trace[i] === trace[4] && trace[4] === trace[8 - i])){
 						wincon.textContent = 'Congratulations! '+ trace[i]+ ' is the Winner!';
 						//console.log(wincon);
+						win =true;
 					}
 				}
 			}
